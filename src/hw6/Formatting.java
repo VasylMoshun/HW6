@@ -14,14 +14,11 @@ public class Formatting {
     }
 
     public void formatText(String text) {
-        String removePunctuation = text.replaceAll("\\p{Punct}", "");
-        numberOfSigns = text.length() - removePunctuation.length();
+        String removePunctuation = getRemovePunctuation(text);
 
-        String removeNumbers = removePunctuation.replaceAll("[0-9]", "");
-        numberOfNumbers = removePunctuation.length() - removeNumbers.length();
+        String removeNumbers = getString(removePunctuation);
 
-        String removeSpaces = removeNumbers.replaceAll(" ", "");
-        numberOfSpaces = removeNumbers.length() - removeSpaces.length();
+        String removeSpaces = getRemoveSpaces(removeNumbers);
 
         numberOfLetters = removeSpaces.length();
 
@@ -41,5 +38,23 @@ public class Formatting {
         System.out.println("Number of numbers: " + numberOfNumbers);
         System.out.println("Number of punctuation marks: " + numberOfSigns);
         System.out.println("Number of spaces: " + numberOfSpaces);
+    }
+
+    private String getRemovePunctuation(String text) {
+        String removePunctuation = text.replaceAll("\\p{Punct}", "");
+        numberOfSigns = text.length() - removePunctuation.length();
+        return removePunctuation;
+    }
+
+    public String getRemoveSpaces(String removeNumbers) {
+        String removeSpaces = removeNumbers.replaceAll(" ", "");
+        numberOfSpaces = removeNumbers.length() - removeSpaces.length();
+        return removeSpaces;
+    }
+
+    public String getString(String removePunctuation) {
+        String removeNumbers = removePunctuation.replaceAll("[0-9]", "");
+        numberOfNumbers = removePunctuation.length() - removeNumbers.length();
+        return removeNumbers;
     }
 }
